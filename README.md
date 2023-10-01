@@ -1,20 +1,4 @@
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/subsquid/squid-evm-template)
-
-# Minimal EVM squid
-
-This is a starter template of a squid indexer for EVM networks (Ethereum, Polygon, BSC, etc.). See [Squid SDK docs](https://docs.subsquid.io/) for a complete reference.
-
-To extract EVM logs and transactions by a topic or a contract address, use `EvmBatchProcessor.addLog()` and `EvmBatchProcessor.addTransaction()` methods of the `EvmBatchProcessor` instance defined in `src/processor.ts`. 
-
-The requested data is transformed in batches by a single handler provided to the `processor.run()` method. 
-
-For a full list of supported networks and config options,
-check the [`EvmBatchProcessor` overview](https://docs.subsquid.io/develop-a-squid/evm-processor/) and the [configuration page](https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/).
-
-For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).
-
-
-## Quickstart Installation and Dependancies
+# Installation and Dependancies
 Install Node.js and Docker. For windows user, Docker can download in https://docs.docker.com/desktop/install/windows-install and Nodejs can download in https://nodejs.org/en/download <br/>
 <b>Note: please use your PC, because docker does not support in android anything</b>
 
@@ -114,6 +98,9 @@ npm i -g @subsquid/util-xxhash
 npm i -g @subsquid/warthog
 ```
 
+Deploy an evm squid
+
+
 ```bash
 # 1. Retrieve the template
 sqd init my_squid_name -t evm
@@ -188,3 +175,21 @@ The layout of `lib` must reflect `src`.
 * Database schema must be defined in `schema.graphql`.
 * Database migrations must reside in `db/migrations` and must be plain js files.
 * `sqd(1)` and `squid-*(1)` executables consult `.env` file for environment variables.
+
+
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/subsquid/squid-evm-template)
+
+# Minimal EVM squid
+
+This is a starter template of a squid indexer for EVM networks (Ethereum, Polygon, BSC, etc.). See [Squid SDK docs](https://docs.subsquid.io/) for a complete reference.
+
+To extract EVM logs and transactions by a topic or a contract address, use `EvmBatchProcessor.addLog()` and `EvmBatchProcessor.addTransaction()` methods of the `EvmBatchProcessor` instance defined in `src/processor.ts`. 
+
+The requested data is transformed in batches by a single handler provided to the `processor.run()` method. 
+
+For a full list of supported networks and config options,
+check the [`EvmBatchProcessor` overview](https://docs.subsquid.io/develop-a-squid/evm-processor/) and the [configuration page](https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/).
+
+For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).
+
