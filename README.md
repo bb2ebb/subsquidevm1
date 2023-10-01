@@ -14,6 +14,7 @@ check the [`EvmBatchProcessor` overview](https://docs.subsquid.io/develop-a-squi
 For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).
 
 Dependencies: Node.js, Docker.
+[please use your PC, because docker does not support in android anything]
 
 ## Quickstart
 
