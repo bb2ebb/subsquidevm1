@@ -13,15 +13,108 @@ check the [`EvmBatchProcessor` overview](https://docs.subsquid.io/develop-a-squi
 
 For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).
 
-Dependencies: Node.js, Docker.
-[`please use your PC, because docker does not support in android anything`]
 
-## Quickstart
+## Quickstart Installation and Dependancies
+Install Node.js and Docker. For windows user, Docker can download in https://docs.docker.com/desktop/install/windows-install and Nodejs can download in https://nodejs.org/en/download <br/>
+<b>Note: please use your PC, because docker does not support in android anything</b>
 
 ```bash
-# 0. Install @subsquid/cli a.k.a. the sqd command globally
+sudo apt-get update
+sudo apt-get install node nodejs npm docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 npm i -g @subsquid/cli
+```
+<br/>
+For additional dependency installations, you can install this to ensure your work runs smoothly without obstacles in the future. 
 
+```bash
+npm i -g @types/node
+npm i -g typescript
+npm i -g @subsquid/archive-registry
+npm i -g @subsquid/big-decimal
+npm i -g @subsquid/bigquery-store
+npm i -g @subsquid/bn-typeorm
+npm i -g @subsquid/cli
+npm i -g @subsquid/commands
+npm i -g @subsquid/csv-store
+npm i -g @subsquid/duckdb-store
+npm i -g @subsquid/eth-ingest
+npm i -g @subsquid/evm-ingest
+npm i -g @subsquid/evm-processor
+npm i -g @subsquid/evm-typegen
+npm i -g @subsquid/file-store
+npm i -g @subsquid/file-store-csv
+npm i -g @subsquid/file-store-json
+npm i -g @subsquid/file-store-parquet
+npm i -g @subsquid/file-store-s3
+npm i -g @subsquid/frontier
+npm i -g @subsquid/graphiql-console
+npm i -g @subsquid/graphql-server
+npm i -g @subsquid/gsheets-store
+npm i -g @subsquid/http-client
+npm i -g @subsquid/hydra-cli
+npm i -g @subsquid/hydra-common
+npm i -g @subsquid/hydra-db-utils
+npm i -g @subsquid/hydra-processor
+npm i -g @subsquid/hydra-typegen
+npm i -g @subsquid/ink-abi
+npm i -g @subsquid/ink-typegen
+npm i -g @subsquid/logger
+npm i -g @subsquid/openreader
+npm i -g @subsquid/rpc-client
+npm i -g @subsquid/scale-codec
+npm i -g @subsquid/scale-codec-json
+npm i -g @subsquid/scale-type-system
+npm i -g @subsquid/squid-gen
+npm i -g @subsquid/squid-gen-evm
+npm i -g @subsquid/squid-gen-ink
+npm i -g @subsquid/squid-gen-targets
+npm i -g @subsquid/squid-gen-utils
+npm i -g @subsquid/ss58
+npm i -g @subsquid/ss58-codec
+npm i -g @subsquid/substrate-data
+npm i -g @subsquid/substrate-data-raw
+npm i -g @subsquid/substrate-dump
+npm i -g @subsquid/substrate-evm-processor
+npm i -g @subsquid/substrate-frontier-evm
+npm i -g @subsquid/substrate-ingest
+npm i -g @subsquid/substrate-metadata
+npm i -g @subsquid/substrate-metadata-explorer
+npm i -g @subsquid/substrate-processor
+npm i -g @subsquid/substrate-runtime
+npm i -g @subsquid/substrate-typegen
+npm i -g @subsquid/typeorm-codegen
+npm i -g @subsquid/typeorm-config
+npm i -g @subsquid/typeorm-migration
+npm i -g @subsquid/typeorm-store
+npm i -g @subsquid/util
+npm i -g @subsquid/util-internal
+npm i -g @subsquid/util-internal-archive-client
+npm i -g @subsquid/util-internal-archive-layout
+npm i -g @subsquid/util-internal-binary-heap
+npm i -g @subsquid/util-internal-code-printer
+npm i -g @subsquid/util-internal-commander
+npm i -g @subsquid/util-internal-config
+npm i -g @subsquid/util-internal-counters
+npm i -g @subsquid/util-internal-fs
+npm i -g @subsquid/util-internal-gql-request
+npm i -g @subsquid/util-internal-hex
+npm i -g @subsquid/util-internal-http-client
+npm i -g @subsquid/util-internal-http-server
+npm i -g @subsquid/util-internal-ingest-tools
+npm i -g @subsquid/util-internal-json
+npm i -g @subsquid/util-internal-processor-tools
+npm i -g @subsquid/util-internal-prometheus-server
+npm i -g @subsquid/util-internal-range
+npm i -g @subsquid/util-internal-read-lines
+npm i -g @subsquid/util-internal-resilient-rpc
+npm i -g @subsquid/util-internal-service-manager
+npm i -g @subsquid/util-naming
+npm i -g @subsquid/util-timeout
+npm i -g @subsquid/util-xxhash
+npm i -g @subsquid/warthog
+```
+
+```bash
 # 1. Retrieve the template
 sqd init my_squid_name -t evm
 cd my_squid_name
