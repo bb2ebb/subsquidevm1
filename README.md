@@ -175,7 +175,7 @@ If successful, you will see output like this.
 
 ![aa](https://i.imgur.com/mKwgNED.png)
 
-#### 7. Update your "processor.ts" again who located in "./subsquidevm1/src/" using code like as below. copy paste all in:
+#### 7. Update your "processor.ts" again who located in "./subsquidevm1/src/". Replace using code like as below. copy paste all in:
 ```bash
 import {lookupArchive} from '@subsquid/archive-registry';
 import {
@@ -235,3 +235,84 @@ sqd codegen
 If successful, you will see output like this.
 
 ![aa](https://i.imgur.com/q67WWEO.png)
+
+#### 9. Update your "main.ts" again who located in "./subsquidevm1/src/". Replace using code like as below. copy paste all in::
+```bash
+import {TypeormDatabase} from '@subsquid/typeorm-store'
+import {Burn} from './model'
+import {processor} from './processor'
+import * as GravatarABI from "./abi/Gravity";
+processor.run(new TypeormDatabase({supportHotBlocks: true}), async (ctx) => {
+    const gravatars: Gravatar[] = []
+    for (let c of ctx.blocks) {
+        for (let log of c.logs) {
+            if (log.topics[0] === GravatarABI.events.NewGravatar.topic) {
+                let{id, owner, displayName, imageUrl} =
+                  GravatarABI.events.NewGravatar.decode(log);
+                let idString = id.toString(16);
+                let gravatar = new Gravatar({
+                    id: id,
+                    owner: owner,
+                    displayName: displayName,
+                    imageUrl: imageUrl,
+                });
+            }
+        }
+    }
+    const burned = burns.reduce((acc, b) => acc + b.value, 0n) / 1_000_000_000n
+    const startBlock = ctx.blocks.at(0)?.header.height
+    const endBlock = ctx.blocks.at(-1)?.header.height
+    ctx.log.info(`Burned ${burned} Gwei from ${startBlock} to ${endBlock}`)
+    await ctx.store.upsert(burns)
+})
+```
+
+#### 10. In the bash terminal, type:
+```bash
+sqd codegen
+```
+
+#### 11. Update your "main.ts" again who located in "./subsquidevm1/src/". Replace using code like as below. copy paste all in::
+```bash
+import {TypeormDatabase} from '@subsquid/typeorm-store'
+import {Burn} from './model'
+import {processor} from './processor'
+import * as GravatarABI from "./abi/Gravity";
+processor.run(new TypeormDatabase({supportHotBlocks: true}), async (ctx) => {
+    const gravatars: Gravatar[] = []
+    for (let c of ctx.blocks) {
+        for (let log of c.logs) {
+            if (log.topics[0] === GravatarABI.events.NewGravatar.topic) {
+                let{id, owner, displayName, imageUrl} =
+                  GravatarABI.events.NewGravatar.decode(log);
+                let idString = id.toString(16);
+                let gravatar = new Gravatar({
+                    id: id,
+                    owner: owner,
+                    displayName: displayName,
+                    imageUrl: imageUrl,
+                });
+            }
+        }
+    }
+    const burned = burns.reduce((acc, b) => acc + b.value, 0n) / 1_000_000_000n
+    const startBlock = ctx.blocks.at(0)?.header.height
+    const endBlock = ctx.blocks.at(-1)?.header.height
+    ctx.log.info(`Burned ${burned} Gwei from ${startBlock} to ${endBlock}`)
+    await ctx.store.upsert(burns)
+})
+```
+
+#### 12. Build your code. In the bash terminal, type:
+```bash
+npm i --save-dev @types/node
+npm audit fix
+sqd build
+```
+
+#### 13. Time for migration.  In the bash terminal, type:
+```bash
+sqd up
+sqd migration:generate
+```
+
