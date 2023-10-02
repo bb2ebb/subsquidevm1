@@ -316,3 +316,53 @@ sqd up
 sqd migration:generate
 ```
 
+If successful, you will see output like this.
+![aa](https://i.imgur.com/QwDWZyX.png)
+
+#### 14. Process. In the bash terminal, type:
+```bash
+sqd process
+```
+
+If successful, you will see output like this.
+```bash
+CLEAN
+BUILD
+MIGRATION:APPLY
+query: SELECT * FROM current_schema()
+query: SELECT version();
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'migrations'
+query: CREATE TABLE "migrations" ("id" SERIAL NOT NULL, "timestamp" bigint NOT NULL, "name" character varying NOT NULL, CONSTRAINT "PK_8c82d7f526340ab734260ea46be" PRIMARY KEY ("id"))
+query: SELECT * FROM "migrations" "migrations" ORDER BY "id" DESC
+0 migrations are already loaded in the database.
+1 migrations were found in the source code.
+1 migrations are new migrations must be executed.
+query: START TRANSACTION
+query: CREATE TABLE "gravatar" ("id" character varying NOT NULL, "owner" text NOT NULL, "display_name" text NOT NULL, "image_url" text NOT NULL, CONSTRAINT "PK_e887b4dffafd686933930ef25bb" PRIMARY KEY ("id"))
+query: INSERT INTO "migrations"("timestamp", "name") VALUES ($1, $2) -- PARAMETERS: [1696228498609,"Data1696228498609"]
+Migration Data1696228498609 has been  executed successfully.
+query: COMMIT
+PROCESS
+13:39:26 INFO  sqd:processor processing blocks from 6000000
+13:39:35 INFO  sqd:processor using archive data source
+13:39:35 INFO  sqd:processor prometheus metrics are served at port 2932
+13:39:41 INFO  sqd:processor 6114479 / 18259733, rate: 19786 blocks/sec, mapping: 1006 blocks/sec, 48 items/sec, eta: 11m
+13:39:46 INFO  sqd:processor 6223599 / 18259733, rate: 22283 blocks/sec, mapping: 1736 blocks/sec, 1020 items/sec, eta: 10m
+13:39:51 INFO  sqd:processor 6229039 / 18259733, rate: 17201 blocks/sec, mapping: 1573 blocks/sec, 944 items/sec, eta: 12m
+13:39:56 INFO  sqd:processor 6341199 / 18259733, rate: 20703 blocks/sec, mapping: 1607 blocks/sec, 852 items/sec, eta: 10m
+13:40:01 INFO  sqd:processor 6455399 / 18259733, rate: 19319 blocks/sec, mapping: 1438 blocks/sec, 728 items/sec, eta: 11m
+13:40:06 INFO  sqd:processor 6597979 / 18259733, rate: 20834 blocks/sec, mapping: 1590 blocks/sec, 809 items/sec, eta: 10m
+13:40:11 INFO  sqd:processor 6872579 / 18259733, rate: 25890 blocks/sec, mapping: 1508 blocks/sec, 329 items/sec, eta: 8m
+13:40:16 INFO  sqd:processor 7386699 / 18259733, rate: 34480 blocks/sec, mapping: 1808 blocks/sec, 85 items/sec, eta: 6m
+                 ***
+                 ***
+                 ***
+```
+
+#### 14. In another bash cmd, type:
+```bash
+sqd serve
+```
+
+##### and access your browser using http://127.0.0.1:4350/graphql
+![aa](https://i.imgur.com/L8MHc1s.png)
